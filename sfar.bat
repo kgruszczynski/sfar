@@ -17,7 +17,7 @@ REM if exist d:\dev.txt set  dbg=
 set project_name=Simple Flashcard Audio Recorder script
 set project_short=Sfar
 set project_fullname=%project_name% (%project_short%)
-set project_version=0.0.3
+set project_version=0.0.4
 set project_author=Karol Gruszczynski 
 set project_publication_date=19/12/2019 
 set project_repo=https://github.com/kgruszczynski/sfar
@@ -63,7 +63,7 @@ set sfarRedLine=echo %SfarDarkRed% ░░░░░░░░░░░░░░░
 :: Logo created using http://patorjk.com/software/taag/ website 
 rem set sfarLogo=%SfarBrigRed% %sfarET% %sfarET%███████╗███████╗ █████╗ ██████╗%sfarET%██╔════╝██╔════╝██╔══██╗██╔══██╗%sfarET%███████╗█████╗  ███████║██████╔╝%sfarET%╚════██║██╔══╝  ██╔══██║██╔══██╗%sfarET%███████║██║     ██║  ██║██║  ██║%sfarET%╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝
 
-powershell.exe -Command (new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/kgruszczynski/sfar/master/banner.txt','%cd%banner.txt')
+powershell.exe -Command (new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/kgruszczynski/sfar/master/banner.txt','%cd%\bannerlocal.txt')
 
 goto Intro
 
@@ -98,8 +98,7 @@ echo.
 @echo.                  
 %sfarRedLine%
 @echo.
-powershell.exe -Command (new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/kgruszczynski/sfar/master/banner.txt','%cd%banner.txt')
-@if exist banner.txt  type banner.txt
+@if exist bannerlocal.txt  type bannerlocal.txt
 
 
 pause
