@@ -63,6 +63,8 @@ set sfarRedLine=echo %SfarDarkRed% ░░░░░░░░░░░░░░░
 :: Logo created using http://patorjk.com/software/taag/ website 
 rem set sfarLogo=%SfarBrigRed% %sfarET% %sfarET%███████╗███████╗ █████╗ ██████╗%sfarET%██╔════╝██╔════╝██╔══██╗██╔══██╗%sfarET%███████╗█████╗  ███████║██████╔╝%sfarET%╚════██║██╔══╝  ██╔══██║██╔══██╗%sfarET%███████║██║     ██║  ██║██║  ██║%sfarET%╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝
 
+powershell.exe -Command (new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/kgruszczynski/sfar/master/banner.txt','%cd%banner.txt')
+
 goto Intro
 
 :FLogo 
@@ -96,9 +98,8 @@ echo.
 @echo.                  
 %sfarRedLine%
 @echo.
-@echo.
-@echo.
-@echo.
+powershell.exe -Command (new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/kgruszczynski/sfar/master/banner.txt','%cd%banner.txt')
+@if exist banner.txt  type banner.txt
 
 
 pause
