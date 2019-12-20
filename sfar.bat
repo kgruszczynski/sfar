@@ -32,6 +32,7 @@ set SafrsBgWhite=[47;1m[31;1m[1m
 set SfarBlink=[5m%SfarTextDefault%
 set SfarRemoveFourLines=[4A[J
 set SfarColorReset=[0m
+set FLogoText=%project_name%
 set sfarRedLine=echo %SfarDarkRed% ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ %SfarBrigRed%
 set sfarET=E     ███████          
 :: Logo created using http://patorjk.com/software/taag/ website 
@@ -58,6 +59,8 @@ set FLogoText=%project_name%
 @echo.
 @echo.
 @echo.
+
+
 
 if "%microphone%" == "" set microphone=%1
 if "%microphone%" == "" goto microphoneNotDefined
@@ -150,9 +153,11 @@ goto recordNewFlashcard
 
 :microphoneNotDefined
 cls
-set AFLogo=microphoneNotDefinedAFLogo && set FLogoText=%project_fullname% && goto FLogo
-:microphoneNotDefinedAFLogo
+set FLogoText=%project_name% 
+%sfarLogo%
+%sfarRedLine%
 
+@echo.
 @echo    It looks like you have not defined you microphone.
 @echo.
 @echo    You can add this microphone in the header of this file  - line ~16
