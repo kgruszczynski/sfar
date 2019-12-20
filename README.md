@@ -7,6 +7,7 @@ Have you tried audio flashcard ?
 
 This script will help you to create audio flashcards in mp3.
 
-It uses ffmpeg 
+It uses ffmpeg for recording and VLC for playback
+You need to configure your microphone
 
 You can ask cover image - cover.jpeg
