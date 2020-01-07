@@ -16,4 +16,5 @@ You need to configure your microphone first.
 You can add your own cover image to your mp3 files
 (just replace cover.jpeg with your custom image)
 
-you can add your pre- and -post jingles/sounds (BETA)
+you can add your pre.mp3 and post.mp3 jingles/sounds 
+which are merged with every flashcard (ALFA)
