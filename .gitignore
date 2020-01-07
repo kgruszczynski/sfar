@@ -2,3 +2,6 @@ flashcards
 test.bat
 mic.txt
 bannerlocal.txt
+*.log
+.idea
+*.mp3

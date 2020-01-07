@@ -1,6 +1,7 @@
-chcp 65001
+cls
+@chcp 65001
 @echo off 
-
+cls 
 ::   Debugging
 ::   use this to hide debug info - line starting with %dbg%
 ::   set dbg=rem   
@@ -14,8 +15,8 @@ REM if exist d:\dev.txt set  dev=
 REM if exist d:\dev.txt set  dbg=
 
 
-set project_name=Simple Flashcard Audio Recorder script
-set project_short=Sfar
+set project_name=Simple Flashcard Audio Recorder Script
+set project_short=SFAR
 set project_fullname=%project_name% (%project_short%)
 set project_version=0.0.4
 set project_author=Karol Gruszczynski 
@@ -25,11 +26,12 @@ set project_repo=https://github.com/kgruszczynski/sfar
 
 
 set microphone=
-set microphone=Mikrofon (Microphone Control (DVR))
+REM set microphone=Mikrofon (Microphone Control (DVR))
 REM %dev%%dbg% if exist micname.txt set /p microphone=<micname.txt
 if exist mic.txt set microphone=Mikrofon (Microphone Control (DVR))
-%dev%%dbg% echo %microphone%
-%dev%%dbg% pause 
+echo %microphone%
+
+
 
 set fileFolder=flashcards
 set filenamePrefixOne=PartA_
@@ -39,8 +41,11 @@ set mp3idTagYear=2019
 set mp3idTagCoverFile=cover.jpeg
 
 set vlc="C:\Program Files\VideoLAN\VLC\vlc.exe"
-set ffmpeg=ffmpeg -hide_banner -loglevel panic
+set ffmpeg=ffmpeg -report:file="sfar.log":level=32 -hide_banner -loglevel panic
+set ffmpeg=ffmpeg -report:file="sfar.log":level=32 
+set ffmpeg=ffmpeg -report:file="sfar.log":level=32 -hide_banner -loglevel panic
 
+set sfarlogfile=sfar.log
 %dbg% set ffmpeg=ffmpeg 
 
 
@@ -55,10 +60,10 @@ set SfarColorReset=[37m%SfarTextDefault%
 set SfarRemoveFourLines=[4A[J
 set SfarRemoveFourLines=[1AK[1A2K[1A2K[1A2K[4B
 set SfarRemoveFourLines=[A[2K[A[2K[A[2K[A[2K[A[2K[A[2K
-set sfarLogoLine=%SfarBrigRed%           ███████║  
+set sfarLogoLine=%SfarBrigRed%      ███████║  
 set LogoText1=%SfarDarkGrn%%project_name%%SfarBrigRed% 
 set LogoText=%LogoText1%
-set sfarRedLine=echo %SfarDarkRed% ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ %SfarBrigRed%
+set sfarRedLine=@echo %SfarDarkRed% ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ %SfarBrigRed%
        
 :: Logo created using http://patorjk.com/software/taag/ website 
 rem set sfarLogo=%SfarBrigRed% %sfarET% %sfarET%███████╗███████╗ █████╗ ██████╗%sfarET%██╔════╝██╔════╝██╔══██╗██╔══██╗%sfarET%███████╗█████╗  ███████║██████╔╝%sfarET%╚════██║██╔══╝  ██╔══██║██╔══██╗%sfarET%███████║██║     ██║  ██║██║  ██║%sfarET%╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝
@@ -77,7 +82,7 @@ goto Intro
 @echo. %sfarLogoLine%╚════██║██╔══╝  ██╔══██║██╔══██╗
 @echo. %sfarLogoLine%███████║██║     ██║  ██║██║  ██║
 @echo. %sfarLogoLine%╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝
-@echo. %SfarBrigRed%           ╚══════╝  %LogoText%
+@echo. %SfarBrigRed%      ╚══════╝  %LogoText%
 goto %AFLogo%
  
 
@@ -88,13 +93,13 @@ set LogoText= && set AFLogo=Intro2 && goto FLogo
 echo.
 %sfarRedLine%
 @echo.       
-@echo  %SfarBrigRed%                    %project_fullname%                                           
-@echo. ..............................................................................................     
+@echo  %SfarBrigRed%     %project_fullname%                                           
+@echo. ..........................................................     
 @echo.                                                                                 
-@echo  %SfarBrigRed%                    Release Version:  %project_version%                          
-@echo  %SfarBrigRed%                    Project Author:   %project_author%                           
-@echo  %SfarBrigRed%                    Publication Date: %project_publication_date%                 
-@echo  %SfarBrigRed%                    Project Repo:     %project_repo%           
+@echo  %SfarBrigRed%     Release Version:  %project_version%                          
+@echo  %SfarBrigRed%     Project Author:   %project_author%                           
+@echo  %SfarBrigRed%     Publication Date: %project_publication_date%                 
+@echo  %SfarBrigRed%     Project Repo:     %project_repo%           
 @echo.                  
 %sfarRedLine%
 @echo.
@@ -116,11 +121,11 @@ cls
 set LogoText=%LogoText1% && set AFLogo=recordNewFlashcard2 && goto FLogo
 :recordNewFlashcard2
 echo.
-@echo %SfarDarkRed% ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+%sfarRedLine%
 @echo.
-@echo %SfarBrigRed%                                  Recording New Flashcard
+@echo %SfarBrigRed%                     Recording New Flashcard
 @echo.
-@echo %SfarDarkRed% ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+%sfarRedLine%
 
 @echo. 
 set filename=
@@ -131,7 +136,7 @@ echo. %SfarBrigRed%
 if "%title%" == "" echo   Title is empty. I believe that means you want to finish.
 if "%title%" == "" goto end  
 
-echo.%title% | findstr /R /C:"[^a-z0-9-_]."  1>nul
+echo.%title% | findstr /R /C:"[^a-z0-9-_]."  1>%sfarlogfile%
 
 if errorlevel 1 (
   goto FileNameIsLegal
@@ -144,7 +149,7 @@ if errorlevel 1 (
 @echo.  Title contains illegal character(s).
 @echo.   
 @echo   Press any key to try again... 
-pause > nul 
+pause > %sfarlogfile% 
 goto recordNewFlashcard
 
 :FileNameIsLegal
@@ -153,21 +158,21 @@ set filename=%fileFolder%/%filenamePrefixOne%%filenamePrefixTwo%%title%.mp3
 if "%fileFolder%" == "" set filename=%filenamePrefixOne%%filenamePrefixTwo%%title%.mp3
 
 :: Create new folder
-if "%fileFolder%" NEQ "" mkdir %fileFolder% >nul 2>&1
+if "%fileFolder%" NEQ "" mkdir %fileFolder% >%sfarlogfile% 2>&1
 
 
 
 if exist "%filename%" @echo   Flashcard %SfarDarkGrn%%filename%%SfarBrigRed% already exists!
 if exist "%filename%" @echo.
 if exist "%filename%" @echo   Press any key to try again... 
-if exist "%filename%" pause  > nul 
+if exist "%filename%" pause  > %sfarlogfile% 
 if exist "%filename%" goto recordNewFlashcard
 
 @echo   Filename:  %SfarDarkGrn% %filename%	%SfarBrigRed%
 @echo. 
 @echo   Press %SfarWhite%any key%SfarBrigRed% to %SfarWhite%start%SfarBrigRed% recording.
 
-pause >nul 
+pause >%sfarlogfile% 
 
  @echo.
  @echo   %SafrsBgWhite%      •  RECORDING NOW                           %SfarBrigRed%
@@ -175,10 +180,9 @@ pause >nul
  @echo   Press %SfarWhite%Q%SfarBrigRed% to %SfarWhite%finish recording%SfarBrigRed%.
  @echo.
 
-rm "%filename%" >nul 2>&1
-rm "%filename%" >nul 2>&1
-del /s /f raw.mp3 >nul 2>&1
-del /s /f raw.mp3 >nul 2>&1
+del /s /f raw.mp3 >%sfarlogfile% 2>&1
+del /s /f out.mp3 >%sfarlogfile% 2>&1
+
 %dbg% pause
 %dbg% ffmpeg -loglevel panic
 %dbg% pause 
@@ -190,14 +194,21 @@ del /s /f raw.mp3 >nul 2>&1
 if exist raw.mp3 @echo. [A[2K[A[2K[A[2K[A[2K[A[2K[A[2K[A[2K[A[2K
 if exist raw.mp3 @echo.  Recording %SfarWhite%finished and saved.%SfarBrigRed%  
 if exist raw.mp3 @echo.  
-  
+
+
+if exist pre.mp3 %ffmpeg% -i pre.mp3 -i raw.mp3 %sfarpost% -filter_complex [0:a][1:a]concat=n=2:v=0:a=1 out.mp3
+if exist out.mp3 copy /y out.mp3 raw.mp3  && del /s /f out.mp3 >%sfarlogfile% 2>&1
+if exist post.mp3 %ffmpeg% -i raw.mp3 -i post.mp3 %sfarpost% -filter_complex [0:a][1:a]concat=n=2:v=0:a=1 out.mp3
+if exist out.mp3 copy /y out.mp3 raw.mp3  && del /s /f out.mp3 >%sfarlogfile% 2>&1
+
+
 if exist %mp3idTagCoverFile%   @echo   Adding %SfarWhite%cover image%SfarBrigRed% to your file.
 if exist %mp3idTagCoverFile%   @echo.  
 if exist %mp3idTagCoverFile% %ffmpeg% -i raw.mp3 -i %mp3idTagCoverFile% -map 0:0 -map 1:0 -codec copy -id3v2_version 3 -metadata:s:v title="%title%"  -metadata:s:v artist="%mp3idTagArtist%"  -metadata:s:v artist="%mp3idTagYear%"  -metadata:s:v comment="Cover (front)" "%filename%"
 if not exist %mp3idTagCoverFile% copy raw.mp3 "%filename%"
-
-rm raw.mp3 >nul 2>&1
-del /s /f raw.mp3 >nul 2>&1
+ 
+del /s /f raw.mp3 >%sfarlogfile% 2>&1
+del /s /f out.mp3 >%sfarlogfile% 2>&1
 
 if not exist "%filename%" @echo   %SfarWhite% Error! %SfarBrigRed% Not saved.
 if not exist "%filename%" @echo.     
@@ -209,7 +220,7 @@ if exist "%filename%" @echo.
 
 @echo   Press any key to %SfarWhite% replay %SfarBrigRed% flashcard.
 @echo.
-pause > nul
+pause > %sfarlogfile%
 
 if %vlc% == "" goto recordNewFlashcard
 
@@ -221,7 +232,7 @@ REM @echo. [A[2K[1A[2K Flashcard is being %SfarWhite% played %SfarBrigRed% w
 
 @echo. [A[2K[A[2K[A[2K
 @echo. [40m[1m %SfarBrigRed%Press any key to%SfarWhite% create new %SfarBrigRed%flashcard.
-pause > nul
+pause > %sfarlogfile%
 goto recordNewFlashcard 
 
 
@@ -265,7 +276,7 @@ set LogoText=%LogoText1% && set AFLogo=microphoneNotDefined2 && goto FLogo
 @echo.   %SfarDarkRed%
 @echo.   Press any key to see result:
 echo.
-pause > nul
+pause > %sfarlogfile%
 cls
 @echo    Microphone list using ffmpeg
 echo.
