@@ -180,8 +180,8 @@ pause >%sfarlogfile%
  @echo   Press %SfarWhite%Q%SfarBrigRed% to %SfarWhite%finish recording%SfarBrigRed%.
  @echo.
 
-del /s /f raw.mp3 >%sfarlogfile% 2>&1
-del /s /f out.mp3 >%sfarlogfile% 2>&1
+@del /s /f raw.mp3 >%sfarlogfile% 2>&1
+@del /s /f out.mp3 >%sfarlogfile% 2>&1
 
 %dbg% pause
 %dbg% ffmpeg -loglevel panic
@@ -191,29 +191,29 @@ del /s /f out.mp3 >%sfarlogfile% 2>&1
 
 %dbg% pause 
 @echo.
-if exist raw.mp3 @echo. [A[2K[A[2K[A[2K[A[2K[A[2K[A[2K[A[2K[A[2K
-if exist raw.mp3 @echo.  Recording %SfarWhite%finished and saved.%SfarBrigRed%  
-if exist raw.mp3 @echo.  
+@if exist raw.mp3 @echo. [A[2K[A[2K[A[2K[A[2K[A[2K[A[2K[A[2K[A[2K
+@if exist raw.mp3 @echo.  Recording %SfarWhite%finished and saved.%SfarBrigRed%  
+@if exist raw.mp3 @echo.  
 
 
-if exist pre.mp3 %ffmpeg% -i pre.mp3 -i raw.mp3 %sfarpost% -filter_complex [0:a][1:a]concat=n=2:v=0:a=1 out.mp3
-if exist out.mp3 copy /y out.mp3 raw.mp3  && del /s /f out.mp3 >%sfarlogfile% 2>&1
-if exist post.mp3 %ffmpeg% -i raw.mp3 -i post.mp3 %sfarpost% -filter_complex [0:a][1:a]concat=n=2:v=0:a=1 out.mp3
-if exist out.mp3 copy /y out.mp3 raw.mp3  && del /s /f out.mp3 >%sfarlogfile% 2>&1
+@if exist pre.mp3 %ffmpeg% -i pre.mp3 -i raw.mp3 %sfarpost% -filter_complex [0:a][1:a]concat=n=2:v=0:a=1 out.mp3
+@if exist out.mp3 @copy /y out.mp3 raw.mp3 > nul  && @del /s /f out.mp3 >%sfarlogfile% 2>&1
+@if exist post.mp3 %ffmpeg% -i raw.mp3 -i post.mp3 %sfarpost% -filter_complex [0:a][1:a]concat=n=2:v=0:a=1 out.mp3
+@if exist out.mp3 @copy /y out.mp3 raw.mp3 > nul  && @del /s /f out.mp3 >%sfarlogfile% 2>&1
 
 
-if exist %mp3idTagCoverFile%   @echo   Adding %SfarWhite%cover image%SfarBrigRed% to your file.
-if exist %mp3idTagCoverFile%   @echo.  
-if exist %mp3idTagCoverFile% %ffmpeg% -i raw.mp3 -i %mp3idTagCoverFile% -map 0:0 -map 1:0 -codec copy -id3v2_version 3 -metadata:s:v title="%title%"  -metadata:s:v artist="%mp3idTagArtist%"  -metadata:s:v artist="%mp3idTagYear%"  -metadata:s:v comment="Cover (front)" "%filename%"
-if not exist %mp3idTagCoverFile% copy raw.mp3 "%filename%"
+@if exist %mp3idTagCoverFile%   @echo   Adding %SfarWhite%cover image%SfarBrigRed% to your file.
+@if exist %mp3idTagCoverFile%   @echo.  
+@if exist %mp3idTagCoverFile% %ffmpeg% -i raw.mp3 -i %mp3idTagCoverFile% -map 0:0 -map 1:0 -codec copy -id3v2_version 3 -metadata:s:v title="%title%"  -metadata:s:v artist="%mp3idTagArtist%"  -metadata:s:v artist="%mp3idTagYear%"  -metadata:s:v comment="Cover (front)" "%filename%"
+@if not exist %mp3idTagCoverFile% @copy raw.mp3 "%filename%"
  
-del /s /f raw.mp3 >%sfarlogfile% 2>&1
-del /s /f out.mp3 >%sfarlogfile% 2>&1
+@del /s /f raw.mp3 >%sfarlogfile% 2>&1
+@del /s /f out.mp3 >%sfarlogfile% 2>&1
 
-if not exist "%filename%" @echo   %SfarWhite% Error! %SfarBrigRed% Not saved.
-if not exist "%filename%" @echo.     
-if not exist "%filename%" pause     
-if not exist "%filename%" goto end 
+@if not exist "%filename%" @echo   %SfarWhite% Error! %SfarBrigRed% Not saved.
+@if not exist "%filename%" @echo.     
+@if not exist "%filename%" pause     
+@if not exist "%filename%" goto end 
 
 if exist "%filename%" @echo   Flashcard has been%SfarWhite% saved%SfarBrigRed%. 
 if exist "%filename%" @echo.
